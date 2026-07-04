@@ -1,54 +1,67 @@
-RUSSIAN
-------------------------------
-## Учебный проект: Хеш-таблица на C
-Это учебный проект, представляющий собой реализацию хеш-таблицы на языке C. В проекте реализованы базовые механизмы управления данными, включая обработку коллизий и эффективный поиск.
-## Основные возможности
-* Создание хеш-таблицы заданного размера.
-* Добавление новых элементов (пар «ключ-значение»).
-* Поиск элементов по ключу за амортизированное время O(1).
-* Удаление элементов с использованием маркера DELETED для сохранения целостности цепочек пробирования.
-* Вывод всех текущих элементов таблицы на экран.
-## Хеширование и коллизии
-Для генерации хеш-кодов используется алгоритм djb2. Хеш-функция вычисляется по формуле:
-hash = ((hash << 5) + hash) + c (что эквивалентно hash * 33 + c), где начальное значение hash = 5381, а c - ASCII код текущего символа строки. Полученное значение берется по модулю размера таблицы.
-Для разрешения коллизий применяется метод открытой адресации. Реализован Маркер DELETED 
-## Компиляция
-gcc имя_файла.c -o имя_программы
-
-пользуйтесь с удовольствием и фаном!
-------------------------------
-
-
-
-
-ENGLISH
-------------------------------
 # Hash Table in C
 
-## Educational Project: Hash Table in C
+## Educational Project
 
-This is an educational project that implements a hash table in the C programming language. The project includes the basic mechanisms for data management, including collision handling and efficient searching.
+This is an educational project that implements a hash table in the C programming language. It demonstrates the core principles of hash tables, including collision handling, dynamic memory management, and efficient data lookup.
 
-## Main Features
+## Features
 
-* Create a hash table of a specified size.
-* Add new elements (key-value pairs).
-* Search for elements by key with an average time complexity of **O(1)**.
-* Delete elements using a **DELETED** marker to preserve the integrity of the probing sequence.
-* Display all current elements of the hash table.
+- Create a hash table with a user-defined size.
+- Insert new key-value pairs.
+- Search for elements by key with an average time complexity of **O(1)**.
+- Delete elements using a **DELETED** marker to preserve the integrity of linear probing.
+- Display the entire contents of the hash table.
+- Save the table to a file.
+- Load the table from a file.
 
-## Hashing and Collision Handling
+## Hashing and Collision Resolution
 
-The **djb2** algorithm is used to generate hash values. The hash function is calculated using the following formula:
+This project uses the **djb2** hashing algorithm.
+
+The hash value is calculated using the following formula:
+
+```text
 hash = ((hash << 5) + hash) + c
-(which is equivalent to hash * 33 + c), where the initial value of hash is 5381, and c is the ASCII code of the current character in the string. The resulting hash value is taken modulo the table size.
-Open addressing is used to resolve collisions. A DELETED marker is implemented for handling deleted entries.
+```
+
+which is equivalent to:
+
+```text
+hash = hash * 33 + c
+```
+
+where:
+
+- the initial hash value is **5381**;
+- **c** is the ASCII value of the current character.
+
+The final hash index is obtained by taking the result modulo the table size.
+
+Collisions are resolved using **open addressing with linear probing**. Deleted entries are marked with a special **DELETED** sentinel, allowing search operations to continue correctly after deletions.
 
 ## Compilation
 
-bash
-gcc filename.c -o program_name
+Compile the project with GCC:
 
-enjoy using it and have fun!
-------------------------------
+```bash
+gcc hash_table.c -o hash_table
+```
 
+Run the program:
+
+```bash
+./hash_table
+```
+
+## Technologies
+
+- C
+- Dynamic Memory Allocation
+- Hash Tables
+- Open Addressing
+- Linear Probing
+- File I/O
+
+---
+
+Feel free to use, modify, and experiment with the project. Happy coding!
