@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 // =============================================
 // HASH TABLE with linear probing
@@ -18,7 +19,7 @@ unsigned int hash_function(const char *key, int table_size) {
     unsigned long hash = 5381;
     int c;
     while ((c = *key++)) {
-        hash = ((hash << 5) + hash) + (unsigned char)c;
+        hash = ((hash << 5) + hash) + (unsigned char)c; // hash * 33 + c
     }
     return hash % table_size;
 }
@@ -121,8 +122,9 @@ int main() {
             unsigned int hash = hash_function(key, table_size);
             int first_deleted = -1;
             int target = -1;
+            bool found = false;
 
-            for (int i = 0; i < table_size; ++i) {
+            for (int i = 0; i < table_size && !found; ++i) {
                 int pos = (hash + i) % table_size;
 
                 if (hash_table[pos] == DELETED) {
@@ -132,7 +134,7 @@ int main() {
                     free(hash_table[pos]->value);
                     hash_table[pos]->value = strdup(value);
                     printf("Value updated for key '%s'\n", key);
-                    goto done_add;
+                    found = true;
                 }
                 else if (hash_table[pos] == NULL) {
                     target = pos;
@@ -140,20 +142,20 @@ int main() {
                 }
             }
 
-            if (target == -1 && first_deleted != -1) target = first_deleted;
+            if(!found){
+                if (target == -1 && first_deleted != -1) target = first_deleted;
 
             if (target != -1) {
                 hash_table[target] = malloc(sizeof(HashNode));
                 if (hash_table[target]) {
-                    hash_table[target]->key = strdup(key);
+                    hash_table[target]так->key = strdup(key);
                     hash_table[target]->value = strdup(value);
                     printf("Added: '%s' -> '%s' (index %d)\n", key, value, target);
                 }
-            } else {
+            }else 
                 printf("Error: table is full!\n");
-            }
-        done_add:;
         }
+    
 
         // ====================== SEARCH ======================
         else if (strcmp(command, "search") == 0) {
@@ -344,4 +346,5 @@ int main() {
     }
 
     return 0;
+}
 }
