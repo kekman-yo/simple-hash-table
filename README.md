@@ -15,9 +15,9 @@ hash = ((hash << 5) + hash) + c (что эквивалентно hash * 33 + c),
 ## Компиляция
 gcc имя_файла.c -o имя_программы
 
-
-Пользуйтесь с удовольствием и фаном!
+пользуйтесь с удовольствием и фаном!
 ------------------------------
+
 
 
 
@@ -49,7 +49,6 @@ Open addressing is used to resolve collisions. A DELETED marker is implemented f
 bash
 gcc filename.c -o program_name
 
-
-Enjoy using it and have fun!
+enjoy using it and have fun!
 ------------------------------
 
