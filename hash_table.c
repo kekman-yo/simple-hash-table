@@ -148,7 +148,7 @@ int main() {
             if (target != -1) {
                 hash_table[target] = malloc(sizeof(HashNode));
                 if (hash_table[target]) {
-                    hash_table[target]так->key = strdup(key);
+                    hash_table[target]->key = strdup(key);
                     hash_table[target]->value = strdup(value);
                     printf("Added: '%s' -> '%s' (index %d)\n", key, value, target);
                 }
